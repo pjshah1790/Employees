@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<link rel = "stylesheet" href="style.css">
+	<link rel = "javascript" href="app.js">
+	<title> My Form </title>
+</head>
+<body>
+	<header>
+		<h1>Employee Database</h1>
+
+	</header>
+
+
+
+	<form action="/add" method="POST">
+		<fieldset>
+				<h3>Add new employee</h3>
+				<label>Employee ID</label>
+					<input type ="text" id = 'empID' name="id" required>
+				<br><br>
+
+				<label>Name</label>
+					<input type="text" id = "name" name="name" required>
+				<br><br>
+
+			<label for="gender"> Select you gender</label>
+			<input type="text" id = "gender" name="gender" required>
+			<!--<select name="gender" id="gender" type="text">
+                <option value="none" selected>Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">other</option>
+            </select> -->
+			<br><br>
+			<label for="birthday">Birthday:</label>
+				<input type="date" id="bod" name="bod" required>
+			<br><br>
+			<label for="city">City:</label>
+				<input type="text" id="city" name="city" required>
+			<br><br>
+
+				<button type ="reset">Reset</button>
+				<button type ="submit">Submit</button>
+		</fieldset>
+	</form>
+	<form action="/view" method="POST">
+		<fieldset>
+				<h3>View an employee</h3>
+				<label>Employee ID</label>
+				<input type="text" id="empID" name="id" placeholder="1,2,3..." required>
+				<br><br>
+				<button type ="reset">Reset</button>
+				<button type ="submit">Submit</button>
+				<br><br><br>
+		</fieldset>
+	</form>
+	<form action="/update" method="POST">
+		<fieldset>
+				<h3>Update an employee</h3>
+				<label>Employee ID</label>
+				<input type ="text" id = 'empID' name="id" placeholder="1,2,3..." required>
+				<br><br>
+
+				<label>New Name</label>
+				<input type="text" id = "name" name="name" placeholder="Maverick" required>
+				<br><br>
+
+				<button type ="reset">Reset</button>
+				<button type ="submit">Submit</button>
+		</fieldset>
+	</form>
+	<form action="/delete" method="POST">
+		<fieldset>
+				<h3>Delete an employee</h3>
+				<label>Employee ID</label>
+				<input type ="text" id = 'empID' name="id" placeholder="1,2,3..." required>
+				<br><br>
+
+				<button type ="reset">Reset</button>
+				<button type ="submit">Submit</button>
+				<br><br><br>
+		</fieldset>
+	</form>
+
+	<form action="/viewData" method="POST">
+		<fieldset>
+			<div class="table-data">
+				<h2>Display Data </h2>
+				<table border="1">
+					<tr>
+						<th>ID</th>
+						<th>Full Name</th>
+						<th>Gender</th>
+						<th>Birth date</th>
+						<th>City</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+
+					<%
+					if(userData.length!=0){
+					var i=1;
+					userData.forEach(function(data){
+					%>
+					<tr>
+						<td><%=i; %></td>
+						<td><%=data.id %></td>
+						<td><%=data.name %></td>
+						<td><%=data.gender %></td>
+						<td><%=data.bod %></td>
+						<td><%=data.city %></td>
+
+						<td><a href="/public/edit/<%=data.id%>">Edit</a></td>
+						<td><a href="/public/delete/<%=data.id%>">Delete</a></td>
+					</tr>
+					<%  i++; }) %>
+					<% } else{ %>
+					<tr>
+						<td colspan="7">No Data Found</td>
+					</tr>
+					<% } %>
+				</table>
+			</div>
+		</fieldset>
+	</form>
+	<footer>
+		<hr>
+		<h4>Please enter 'http://localhost:3000/close' to close the database connection before closing this window</h4>
+	</footer>
+</body>
+</html>
